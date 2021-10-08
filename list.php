@@ -1,3 +1,8 @@
+<?php
+include ('koneksi.php');
+$sql = "SELECT * FROM mahasiswa";
+$query = mysqli_query($conn, $sql);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -76,12 +81,17 @@
                       </tr>
                     </thead>
                     <tbody>
+                      <?php
+                      $no = 0;
+                      while($dt = mysqli_fetch_array($query)){
+                        $no++;
+                      ?>
                       <tr>
-                        <td>1</td>
-                        <td>1905001</td>
-                        <td>Lionel Messi</td>
+                        <td><?php echo $no;?></td>
+                        <td><?php echo $dt['nim'];?></td>
+                        <td><?php echo $dt['nama'];?></td>
                         <td>
-                          <small class="mr-1 text-success"><i class="fas fa-arrow-up"></i>0.51</small>3.51
+                          <small class="mr-1 text-success"><i class="fas fa-arrow-up"></i><?php echo $dt['ipk'];?></small><?php echo $dt['ips'];?>
                         </td>
                         <td>
                           <a href="#" class="text-muted"><i class="fas fa-eye"></i><small>Detail </small></a>
@@ -89,32 +99,9 @@
                           <a href="#" class="text-danger"><i class="fas fa-trash"></i><small>Hapus</small></a>
                         </td>
                       </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>1905002</td>
-                        <td>Christiano Ronaldo</td>
-                        <td>
-                          <small class="mr-1 text-danger"><i class="fas fa-arrow-down"></i>0.30</small>3.20
-                        </td>
-                        <td>
-                          <a href="#" class="text-muted"><i class="fas fa-eye"></i><small>Detail </small></a>
-                          <a href="#" class="text-info"><i class="fas fa-edit"></i><small>Edit </small></a>
-                          <a href="#" class="text-danger"><i class="fas fa-trash"></i><small>Hapus</small></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td>1905003</td>
-                        <td>Tonny Kroos</td>
-                        <td>
-                          <small class="mr-1 text-warning"><i class="fas fa-arrows-alt-h"></i>0</small>3.75
-                        </td>
-                        <td>
-                          <a href="#" class="text-muted"><i class="fas fa-eye"></i><small>Detail </small></a>
-                          <a href="#" class="text-info"><i class="fas fa-edit"></i><small>Edit </small></a>
-                          <a href="#" class="text-danger"><i class="fas fa-trash"></i><small>Hapus</small></a>
-                        </td>
-                      </tr>
+                      <?php
+                      }
+                      ?>
                     </tbody>
                   </table>
               </div>
